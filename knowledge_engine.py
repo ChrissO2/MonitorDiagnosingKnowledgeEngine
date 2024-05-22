@@ -4,6 +4,7 @@ from problem_descriptions import ProblemDescription
 
 
 class MonitorDiagnosis(KnowledgeEngine):
+    """Knowledge engine for diagnosing problems with a monitor"""
     @Rule(Problem(description=ProblemDescription.BLACK_SCREEN.value))
     def diagnose_black_screen_video_card(self):
         self.declare(

@@ -2,7 +2,7 @@ from experta import Fact, Field
 
 
 class Problem(Fact):
-    """Fakt reprezentujący problem z monitorem"""
+    """Fact representing a problem with a monitor"""
     description = Field(str, mandatory=True)
     is_cable_connected = Field(bool, default=True)
     is_monitor_on = Field(bool, default=True)
@@ -10,5 +10,5 @@ class Problem(Fact):
 
 
 class Solution(Fact):
-    """Fakt reprezentujący sugerowane rozwiązanie problemu"""
+    """Fact representing a solution to a problem with a monitor"""
     step = Field(str, mandatory=True)

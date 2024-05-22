@@ -5,6 +5,7 @@ from knowledge_engine import MonitorDiagnosis
 
 
 def main():
+    """CLI for diagnosing monitor problems."""
     engine = MonitorDiagnosis()
     while True:
         print("Podaj opis problemu z monitorem:")
