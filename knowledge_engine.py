@@ -1,4 +1,4 @@
-from experta import KnowledgeEngine, Rule
+from experta import KnowledgeEngine, Rule, OR
 from facts import Problem, Solution
 from problem_descriptions import ProblemDescription
 
@@ -10,27 +10,27 @@ class MonitorDiagnosis(KnowledgeEngine):
         self.declare(
             Solution(step="Wymień kartę graficzną lub podłącz kabel wideo do jednego ze źródeł wideo w komputerze"))
 
-    @Rule(Problem(
-        description=ProblemDescription.BLACK_SCREEN.value,
-        is_cable_connected=False))
+    @Rule(OR(Problem(description=ProblemDescription.BLACK_SCREEN.value), Problem(is_cable_connected=False)))
     def diagnose_black_screen_power_cable(self):
         self.declare(
             Solution(step="Podłącz kabel zasilający monitora."))
         self.declare(Problem(description=ProblemDescription.BLACK_SCREEN.value,
                              is_monitor_on=False))
 
-    @Rule(Problem(
-        description=ProblemDescription.BLACK_SCREEN.value,
-        is_monitor_on=False))
+    @Rule(OR(
+        Problem(description=ProblemDescription.BLACK_SCREEN.value),
+        Problem(is_monitor_on=False)
+    ))
     def diagnose_black_screen_monitor_off(self):
         self.declare(
             Solution(step="Naciśnij przycisk zasilania monitora."))
         self.declare(Problem(description=ProblemDescription.BLACK_SCREEN.value,
                              is_sleep_mode_active=False))
 
-    @Rule(Problem(
-        description=ProblemDescription.BLACK_SCREEN.value,
-        is_sleep_mode_active=True))
+    @Rule(OR
+          (Problem(description=ProblemDescription.BLACK_SCREEN.value)),
+          Problem(is_sleep_mode_active=True)
+          )
     def diagnose_black_screen_sleep_mode(self):
         self.declare(
             Solution(step="Naciśnij klawisz na klawiaturze lub porusz myszą, aby wyjść z trybu uśpienia."))
